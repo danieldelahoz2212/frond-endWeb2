@@ -1,84 +1,123 @@
-import React from "react";
-import { 
-  Grid, 
-  Typography, 
-  Button, 
-  TextField 
-} from "@mui/material";
+import { Grid } from "@mui/material";
+import { useState } from "react";
+import { connect } from "react-redux";
+import { Layout } from "../../components";
+import PropTypes from "prop-types";
+import { DataGrid, esES, GridToolbar  } from "@mui/x-data-grid";
+// import { Delete } from "@mui/icons-material";
+// import axios from "./../../utils/api";
 
+const Inventory = ({ user, permission = [], token }) => {
+  const [list, setList] = useState([
+    {
+      id: 1,
+      nombre: "prueba",
+      descripcion: "daniel",
+      idTipoObjeto: "asdnbflsakjhfdljkasdhflkjashdflkjashdf",
+      fechaEntrada: "20/12/23",
+      ubicacionId: "via 40",
+      origenCompraId:"Malambo"
+    },
+  ]);
 
-const Inventory = () => {
+  const Column = [
+    {
+      field: "nombre",
+      headerName: "Nombre",
+      width: 300,
+      renderCell: ({ row }) => <div>{row.nombre}</div>,
+    },
+    {
+      field: "descripcion",
+      headerName: "Descripción",
+      width: 300,
+      renderCell: ({ row }) => <div>{row.descripcion}</div>,
+    },
+    { 
+      field: "idTipoObjeto", 
+      headerName: "Tipo De Objeto", 
+      width: 700 
+    },
+    { 
+      field: "fechaEntrada", 
+      headerName: "Fecha De Entrada", 
+      width: 700 
+    },
+    {
+      field: "ubicacionId",
+      headerName: "Ubicación",
+      width: 300,
+      renderCell: ({ row }) => <div>{row.ubicacionId}</div>,
+    },
+    {
+      field: "origenCompraId",
+      headerName: "Origen De Compra",
+      width: 300,
+      renderCell: ({ row }) => <div>{row.origenCompraId}</div>,
+    }
+
+    // {
+    //   field: "estado",
+    //   headerName: "Estado",
+    //   width: 100,
+    //   renderCell: <></>,
+    //   align: "center",
+    // },
+    // permission.includes(4) && {
+    //   headerName: "",
+    //   width: 150,
+    //   renderCell: <></>,
+    //   align: "center",
+    // },
+  ];
+
   return (
     <Grid
       container
       component="main"
-      sx={styles.root}
-      direction="row"
       justifyContent="center"
+      sx={{ height: "100vh", background: "#e7f3ff" }}
     >
-      <Grid container item justifyContent="center" sx={styles.inventario}>
-        <Grid item justifyContent="center" display="flex">
-          <Typography sx={styles.title} mt={5}>Inventaro</Typography>
-        </Grid>
-        <Grid item mt={5} display="flex" direction="column">
-          <TextField color="primary" label="Opciones" sx={styles.combobox} />
-        </Grid>
-        <Grid item mt={5} display="flex" direction="column">
-          <TextField color="primary" label="Opciones" sx={styles.combobox} />
-        </Grid>
-        <Grid item md={2} mt={5} display="flex" direction="column">
-          <Button variant="contained" sx={styles.button}>
-            filtro
-          </Button>
-        </Grid>
-        <Grid
-          item
-          container
-          justifyContent="center"
-          display="flex"
-          sx={styles.contenedor}
-        >
-          <Grid></Grid>
+      <Layout title="Inventario" />
+      <Grid
+        item
+        container
+        xs={11}
+        display="flex"
+        justifyItems="initial"
+        sx={{
+          height: "80%",
+        }}
+      >
+        <Grid item xs={12} mt={2}>
+          <DataGrid
+            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+            rows={list}
+            columns={Column}
+            disableSelectionOnClick
+            pageSize={5}
+            autoHeight
+            rowsPerPageOptions={[5]}
+            slots={{ toolbar: GridToolbar }}
+          />
         </Grid>
       </Grid>
     </Grid>
   );
 };
+const mapStateToProps = (state) => ({
+  permission:
+    state.permission
+      ?.filter((item) => item.modulosAcciones.id_modulos === 3)
+      .map((item) => item.modulosAcciones.acciones.id) || [],
+  token: state.token,
+  user: state.user,
+});
 
-const styles = {
-  root: {
-    height: "100vh",
-  },
-  title: {
-    fontSize: "250%",
-    fontWeight: "bold",
-    fontFamily: "Poppins",
-    marginLeft: "-200%",
-  },
-  contenedor: {
-    backgroundColor: "#7abeff",
-    width: "95%",
-    height: "90%",
-    borderRadius: "10px",
-    boxShadow: "7px 13px 37px #000",
-  },
-  inventario: {
-    background: "#e7f3ff",
-    width: "95%",
-    borderRadius: "10px",
-    height: "150%",
-  },
-  button: {
-    backgroundColor: "#348feb",
-    width: "30%",
-    height: "80%",
-    borderRadius: "5px",
-    marginLeft: "167%",
-  },
-  combobox: {
-    width: "200px",
-    marginLeft: "200%",
-  },
+Inventory.prototype = {
+  permission: PropTypes.array.isRequired,
+  token: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
-export default Inventory;
+export default connect(mapStateToProps, null)(Inventory);
