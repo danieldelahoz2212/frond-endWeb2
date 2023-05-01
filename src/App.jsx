@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { Register, SignIn } from "./screens/";
+import { Register, SignIn, Inventory } from "./screens/";
 
 const App = () => {
   return (
@@ -8,6 +8,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/inventory" element={<Inventory />} />
       </Routes>
     </BrowserRouter>
   );

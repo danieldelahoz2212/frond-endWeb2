@@ -18,7 +18,7 @@ const SignIn = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Correo Electronico*"
               sx={{ width: "90%" }}
@@ -33,7 +33,7 @@ const SignIn = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Contraseña*"
               sx={{ width: "90%" }}
