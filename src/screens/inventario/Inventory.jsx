@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
+import fondo from "../../assets/fondo.jpeg";
 import { Layout } from "../../components";
 import PropTypes from "prop-types";
 import { DataGrid, esES, GridToolbar  } from "@mui/x-data-grid";
@@ -11,9 +12,9 @@ const Inventory = ({ user, permission = [], token }) => {
   const [list, setList] = useState([
     {
       id: 1,
-      nombre: "prueba",
-      descripcion: "daniel",
-      idTipoObjeto: "asdnbflsakjhfdljkasdhflkjashdflkjashdf",
+      nombre: "ps4",
+      descripcion: "consola de videojuego de 2 generacion",
+      idTipoObjeto: "electrodomestico",
       fechaEntrada: "20/12/23",
       ubicacionId: "via 40",
       origenCompraId:"Malambo"
@@ -30,18 +31,19 @@ const Inventory = ({ user, permission = [], token }) => {
     {
       field: "descripcion",
       headerName: "Descripción",
-      width: 300,
+      width: 700,
       renderCell: ({ row }) => <div>{row.descripcion}</div>,
     },
     { 
       field: "idTipoObjeto", 
       headerName: "Tipo De Objeto", 
-      width: 700 
+      width: 300,
+      renderCell: ({ row }) => <div>{row.idTipoObjeto}</div>,
     },
     { 
       field: "fechaEntrada", 
       headerName: "Fecha De Entrada", 
-      width: 700 
+      width: 300
     },
     {
       field: "ubicacionId",
@@ -76,7 +78,7 @@ const Inventory = ({ user, permission = [], token }) => {
       container
       component="main"
       justifyContent="center"
-      sx={{ height: "100vh", background: "#e7f3ff" }}
+      sx={{ height: "100vh", backgroundImage:`url(${fondo})` }}
     >
       <Layout title="Inventario" />
       <Grid
@@ -89,7 +91,7 @@ const Inventory = ({ user, permission = [], token }) => {
           height: "80%",
         }}
       >
-        <Grid item xs={12} mt={2}>
+        <Grid item xs={12} mt={2} sx={{background: "#e7f3ff", borderRadius:"7px"}}>
           <DataGrid
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             rows={list}
@@ -105,6 +107,7 @@ const Inventory = ({ user, permission = [], token }) => {
     </Grid>
   );
 };
+
 const mapStateToProps = (state) => ({
   permission:
     state.permission
