@@ -1,4 +1,9 @@
 export {default as SignIn} from "./login/SignIn.jsx"
 export {default as Register} from "./login/Register.jsx"
-
-
+export {default as Inventory} from "./inventario/Inventory.jsx"
+export {default as Sale} from "./venta/Sale.jsx"
+export {default as SaleData} from "./venta/SaleData.jsx"
+export {default as Transfer} from "./traslado/Transfer.jsx"
+export {default as Buy} from "./compra/Buy.jsx"
+export {default as Box} from "./caja/Box.jsx"
+export {default as InventoryData} from "./inventario/InventoryData.jsx"

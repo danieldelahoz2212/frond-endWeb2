@@ -18,6 +18,9 @@ const Register = (props) => {
     password: "",
     idTipoDocunento: 0,
     nombre: "",
+    apellido: "",
+    numTelefono: "",
+    document: "",
   });
 
   const handleInput = (event) => {
@@ -58,14 +61,14 @@ const Register = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Nombre De Usuario"
               sx={{ width: "90%" }}
-              // value={form.email}
+              value={form.nombre}
               onChange={handleInput}
               name="nombre"
-              type="nombre"
+              type="string"
               id="nombre"
             />
           </Grid>
@@ -73,15 +76,30 @@ const Register = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
+              variant="outlined"
+              label="Apellido De Usuario"
+              sx={{ width: "90%" }}
+              value={form.apellido}
+              onChange={handleInput}
+              name="apellido"
+              type="string"
+              id="apellido"
+            />
+          </Grid>
+        </Grid>
+        <Grid container item direction="column" mt={2}>
+          <Grid item justifyContent="center" display="flex">
+            <TextField
+              color="primary"
               variant="outlined"
               label="Numero De Telefono"
               sx={{ width: "90%" }}
-              // value={form.email}
+              value={form.numTelefono}
               onChange={handleInput}
-              name="user"
+              name="numTelefono"
               type="string"
-              id="user"
+              id="numTelefono"
             />
           </Grid>
         </Grid>
@@ -98,7 +116,7 @@ const Register = (props) => {
             getOptionLabel={(option) => option.label}
             options={typesDocuments}
             renderInput={(params) => (
-              <TextField {...params} color="warning" label="Tipo Documento" />
+              <TextField {...params} color="primary" label="Tipo Documento" />
             )}
             onChange={(e, value) => {
               console.log(value);
@@ -114,11 +132,11 @@ const Register = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Numero De Documento"
               sx={{ width: "90%" }}
-              // value={form.email}
+              value={form.document}
               onChange={handleInput}
               name="document"
               type="string"
@@ -129,7 +147,7 @@ const Register = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Correo Electronico"
               sx={{ width: "90%" }}
@@ -144,7 +162,7 @@ const Register = (props) => {
         <Grid container item direction="column" mt={2}>
           <Grid item justifyContent="center" display="flex">
             <TextField
-              color="warning"
+              color="primary"
               variant="outlined"
               label="Contraseña"
               sx={{ width: "90%" }}
@@ -156,11 +174,6 @@ const Register = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid item mt={1} display="flex" justifyContent="end" mr={3}>
-          <Link to="/SignIn" style={{ color: "#000" }}>
-            <Typography>¿ya tienes usuario?</Typography>
-          </Link>
-        </Grid>
         <Grid item mt={3} display="flex" justifyContent="center">
           <Loading loading={loading} />
         </Grid>
@@ -168,6 +181,11 @@ const Register = (props) => {
           <Button variant="contained" sx={styles.button}>
             Registrar
           </Button>
+        </Grid>
+        <Grid item mt={1} display="flex" justifyContent="center" mr={3}>
+          <Link to="/" style={{ color: "#000" }}>
+            <Typography>¿ya tienes usuario?</Typography>
+          </Link>
         </Grid>
       </Grid>
     </Grid>
@@ -189,7 +207,7 @@ const styles = {
     justifyContent: "center",
   },
   title: {
-    fintSize: "250%",
+    fontSize: "250%",
     fontWeight: "bold",
     fontFamily: "Poppins",
   },

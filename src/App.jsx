@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { Register, SignIn } from "./screens/";
+import { Register, SignIn, Inventory, Sale, SaleData, InventoryData, Buy, Box} from "./screens/";
+import Transfer from './screens/traslado/Transfer';
 
 const App = () => {
   return (
@@ -8,6 +9,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/sale" element={<Sale />} />
+        <Route path="/transfer" element={<Transfer />} />
+        <Route path="/Buy" element={<Buy />} />
+        <Route path="/saledata" element={<SaleData />} />
+        <Route path="/inventorydata" element={<InventoryData />} />
+        <Route path="/box" element={<Box />} />
       </Routes>
     </BrowserRouter>
   );
