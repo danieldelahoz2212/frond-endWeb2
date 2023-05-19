@@ -1,3 +1,4 @@
+import {Link, useHistory} from "react-router-dom"
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 
@@ -132,7 +133,7 @@ const clientData = () => {
       </Grid>
       <Grid container item direction="column" mt={-15}>
         <Grid item justifyContent="center" display="flex">
-          <Button variant="contained" color="error" sx={{ width: "20%" }}>
+          <Button  component={Link} to="/sale" variant="contained" color="error" sx={{ width: "20%" }}>
             Cancelar
           </Button>
         </Grid>

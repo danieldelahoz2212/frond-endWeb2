@@ -1,5 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const inventoryData = () => {
   return (
@@ -104,7 +105,7 @@ const inventoryData = () => {
       </Grid>
       <Grid container item direction="column" mt={-25}>
         <Grid item justifyContent="center" display="flex">
-          <Button variant="contained" color="error" sx={{ width: "20%" }}>
+        <Button  component={Link} to="/inventory" variant="contained" color="error" sx={{ width: "20%" }}>
           Cancelar
           </Button>
         </Grid>

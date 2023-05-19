@@ -5,6 +5,7 @@ import fondo from "../../assets/fondo.jpeg";
 import { Layout } from "../../components";
 import PropTypes from "prop-types";
 import { DataGrid, esES, GridToolbar  } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
 // import { Delete } from "@mui/icons-material";
 // import axios from "./../../utils/api";
 
@@ -99,6 +100,8 @@ const Inventory = ({ user, permission = [], token }) => {
         >
           <div className="container" style={{display:"flex", justifyContent:"center"}}>
           <Button
+          component={Link}
+          to="/inventorydata"
           variant="contained"
           color="success"
           sx={{width:"15%", marginLeft:"89%"}}

@@ -5,8 +5,9 @@ import fondo from "../../assets/fondo.jpeg";
 import { connect } from "react-redux";
 import { DataGrid, esES, GridToolbar } from "@mui/x-data-grid";
 import { Layout } from "../../components";
-
+import { Link } from "react-router-dom";
 const Sale = ({ user, permission = [], token }) => {
+
   const [list, setList] = useState([
     {
       id: 1,
@@ -63,7 +64,7 @@ const Sale = ({ user, permission = [], token }) => {
       }}
       
     >
-      <Layout title="Venta" />
+      <Layout title="Venta"/>
       <Grid
         item
         container
@@ -81,6 +82,8 @@ const Sale = ({ user, permission = [], token }) => {
         sx={{background: "#e7f3ff", borderRadius:"7px"}}>
           <div className="container" style={{ display: "flex", justifyContent: "center"}}>
           <Button
+          component={Link}
+          to="/saledata"
           variant="contained"
           color="success"
           sx={styles.button}

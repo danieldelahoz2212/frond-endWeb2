@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   AppBar,
+  Button,
   Divider,
   Drawer,
   Grid,
@@ -11,6 +12,7 @@ import {
   styled,
 } from "@mui/material";
 import { Menu, Close, Logout } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Layout = ({ children, title }) => {
   const [open, setOpen] = useState(false);
@@ -89,6 +91,31 @@ const Layout = ({ children, title }) => {
         </DrawerHeader>
         <Divider sx={{ borderColor: "rgb(255 255 255 / 12%)" }} />
         <List sx={{ backgroundColor: "#0a0a0a" }}>
+          <Grid container item direction="column">
+        <Button component={Link} to="/inventory" variant="contained" sx={{backgroundColor:"#0a0a0a"}}>
+          Inventario
+        </Button>
+        </Grid>
+        <Grid container item direction="column">
+        <Button component={Link} to="/sale" variant="contained" sx={{backgroundColor:"#0a0a0a"}}>
+          Venta
+        </Button>
+        </Grid>
+        <Grid container item direction="column">
+        <Button component={Link} to="/transfer" variant="contained" sx={{backgroundColor:"#0a0a0a"}}>
+          Traslado
+        </Button>
+        </Grid>
+        <Grid container item direction="column">
+        <Button component={Link} to="/Buy" variant="contained" sx={{backgroundColor:"#0a0a0a"}}>
+          Compra
+        </Button>
+        </Grid>
+        <Grid container item direction="column">
+        <Button component={Link} to="/box" variant="contained" sx={{backgroundColor:"#0a0a0a"}}>
+          Caja
+        </Button>
+        </Grid>
           {
             // modules.length > 0 && (modules.map(item => (
             //     <ListItem key={item.id} >
