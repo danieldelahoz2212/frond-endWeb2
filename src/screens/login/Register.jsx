@@ -6,7 +6,7 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material";
-import Wallpapper_register from "../../assets/online-shop-6401739_640.png";
+import Wallpapper_register from "../../assets/4762-Facebook-Shops-Qué-es-y-cómo-comenzar-a-utilizarlo.jpg";
 import { Link } from "react-router-dom";
 import { Loading } from "../../components";
 import { backRequiest } from "../../api/back";

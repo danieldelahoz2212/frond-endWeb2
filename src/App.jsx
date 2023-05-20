@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { Register, SignIn, Inventory, Sale, SaleData, InventoryData, Buy, Box} from "./screens/";
+import { Register, SignIn, Inventory, Sale, Buy, Box} from "./screens/";
 import Transfer from './screens/traslado/Transfer';
 
 const App = () => {
@@ -13,8 +13,6 @@ const App = () => {
         <Route path="/sale" element={<Sale />} />
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/Buy" element={<Buy />} />
-        <Route path="/saledata" element={<SaleData />} />
-        <Route path="/inventorydata" element={<InventoryData />} />
         <Route path="/box" element={<Box />} />
       </Routes>
     </BrowserRouter>

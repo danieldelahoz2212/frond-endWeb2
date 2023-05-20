@@ -3,6 +3,17 @@ import { Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const clientData = () => {
+  const handleFormSubmit = () =>{
+    const tipoDocumento = document.getElementById('tipoDocumento').Value;
+    const numDocumento = document.getElementById('numDocument').Value;
+    const nombre = document.getElementById('nombre').Value;
+    const apellido = document.getElementById('apellido').Value;
+    const fecha = document.getElementById('fecha').Value;
+    const numTelefono = document.getElementById('numTelefono').Value;
+    const valor = document.getElementById('valor').Value;
+    const tipoInventario = document.getElementById('tipoDocumento').Value;
+
+  }
   return (
     <Grid
       container
@@ -105,9 +116,9 @@ const clientData = () => {
             variant="outlined"
             label="Valor De La Compra"
             sx={{ width: "50%" }}
-            name="nombre"
+            name="valor"
             type="string"
-            id="nombre"
+            id="valor"
           />
         </Grid>
       </Grid>

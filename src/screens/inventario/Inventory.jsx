@@ -1,15 +1,33 @@
-import { Button, Grid } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
 import fondo from "../../assets/fondo.jpeg";
 import { Layout } from "../../components";
 import PropTypes from "prop-types";
-import { DataGrid, esES, GridToolbar  } from "@mui/x-data-grid";
+import { DataGrid, esES, GridToolbar } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 // import { Delete } from "@mui/icons-material";
 // import axios from "./../../utils/api";
 
 const Inventory = ({ user, permission = [], token }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [list, setList] = useState([
     {
       id: 1,
@@ -18,7 +36,7 @@ const Inventory = ({ user, permission = [], token }) => {
       idTipoObjeto: "electrodomestico",
       fechaEntrada: "20/12/23",
       ubicacionId: "via 40",
-      origenCompraId:"Malambo"
+      origenCompraId: "Malambo",
     },
   ]);
 
@@ -35,16 +53,16 @@ const Inventory = ({ user, permission = [], token }) => {
       width: 700,
       renderCell: ({ row }) => <div>{row.descripcion}</div>,
     },
-    { 
-      field: "idTipoObjeto", 
-      headerName: "Tipo De Objeto", 
+    {
+      field: "idTipoObjeto",
+      headerName: "Tipo De Objeto",
       width: 300,
       renderCell: ({ row }) => <div>{row.idTipoObjeto}</div>,
     },
-    { 
-      field: "fechaEntrada", 
-      headerName: "Fecha De Entrada", 
-      width: 300
+    {
+      field: "fechaEntrada",
+      headerName: "Fecha De Entrada",
+      width: 300,
     },
     {
       field: "ubicacionId",
@@ -57,7 +75,7 @@ const Inventory = ({ user, permission = [], token }) => {
       headerName: "Origen De Compra",
       width: 300,
       renderCell: ({ row }) => <div>{row.origenCompraId}</div>,
-    }
+    },
 
     // {
     //   field: "estado",
@@ -79,7 +97,7 @@ const Inventory = ({ user, permission = [], token }) => {
       container
       component="main"
       justifyContent="center"
-      sx={{ height: "100vh", backgroundImage:`url(${fondo})` }}
+      sx={{ height: "100vh", backgroundImage: `url(${fondo})` }}
     >
       <Layout title="Inventario" />
       <Grid
@@ -92,24 +110,129 @@ const Inventory = ({ user, permission = [], token }) => {
           height: "80%",
         }}
       >
-        <Grid 
-        item 
-        xs={12} 
-        mt={2} 
-        sx={{background: "#e7f3ff", borderRadius:"7px"}}
+        <Grid
+          item
+          xs={12}
+          mt={2}
+          sx={{ background: "#e7f3ff", borderRadius: "7px" }}
         >
-          <div className="container" style={{display:"flex", justifyContent:"center"}}>
-          <Button
-          component={Link}
-          to="/inventorydata"
-          variant="contained"
-          color="success"
-          sx={{width:"15%", marginLeft:"89%"}}
+          <div
+            className="container"
+            style={{ display: "flex", justifyContent: "center" }}
           >
-            Registrar venta
-          </Button>
+            <Button
+              onClick={handleOpen}
+              variant="contained"
+              color="success"
+              sx={{ width: "15%", marginLeft: "89%" }}
+            >
+              Registrar Objeto
+            </Button>
+
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                sx: {
+                  width: "100%",
+                  height: "70%",
+                },
+              }}
+            >
+              <DialogTitle>Objetos Del Inventario</DialogTitle>
+              <DialogContent
+                justifyContent="center"
+                spacing={1}
+                sx={{ background: "#e7f3ff", height: "100vh" }}
+              >
+                <Grid container item direction="column" mt={1}>
+                  <Grid item justifyContent="center" display="flex">
+                    <TextField
+                      color="primary"
+                      variant="outlined"
+                      label="Tipo Objeto"
+                      sx={{ width: "100%" }}
+                      name="idTipoObjeto"
+                      type="string"
+                      id="idTipoObjeto"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container item direction="column" mt={2}>
+                  <Grid item justifyContent="center" display="flex">
+                    <TextField
+                      color="primary"
+                      variant="outlined"
+                      label="Nombre Del Objeto"
+                      sx={{ width: "100%" }}
+                      name="numDocumento"
+                      type="string"
+                      id="numDocumento"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container item direction="row" spacing={1} mt={1}>
+                  <Grid item xs={6}>
+                    <Grid item justifyContent="center" display="flex">
+                      <TextField
+                        color="primary"
+                        variant="outlined"
+                        label="Descripción Del Objeto"
+                        sx={{ width: "100%" }}
+                        name="descripcion"
+                        type="string"
+                        id="descripcion"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Grid item justifyContent="center" display="flex">
+                      <TextField
+                        color="primary"
+                        variant="outlined"
+                        label="Fecha De Entrada"
+                        sx={{ width: "100%" }}
+                        name="fecha"
+                        type="data"
+                        id="fecha"
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid container item direction="column" mt={2} >
+                  <Grid item justifyContent="center" display="flex">
+                    <TextField
+                      color="primary"
+                      variant="outlined"
+                      label="Ubicación Del Objeto"
+                      sx={{ width: "100%" }}
+                      name="ubicacion"
+                      type="string"
+                      id="ubicacion"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container item direction="column" mt={2}>
+                  <Grid item justifyContent="center" display="flex">
+                    <TextField
+                      color="primary"
+                      variant="outlined"
+                      label="Origen De Compra"
+                      sx={{ width: "100%" }}
+                      name="origenCompra"
+                      type="string"
+                      id="origenCompra"
+                    />
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions>
+                <Button>Agregar</Button>
+                <Button onClick={handleClose}>Cerrar</Button>
+              </DialogActions>
+            </Dialog>
           </div>
-          
+
           <DataGrid
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             rows={list}
