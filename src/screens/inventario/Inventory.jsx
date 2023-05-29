@@ -7,13 +7,13 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import fondo from "../../assets/fondo.jpeg";
 import { Layout } from "../../components";
 import PropTypes from "prop-types";
-import { DataGrid, esES, GridToolbar } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+
 // import { Delete } from "@mui/icons-material";
 // import axios from "./../../utils/api";
 
@@ -29,16 +29,46 @@ const Inventory = ({ user, permission = [], token }) => {
   };
 
   const [list, setList] = useState([
-    {
-      id: 1,
-      nombre: "ps4",
-      descripcion: "consola de videojuego de 2 generacion",
-      idTipoObjeto: "electrodomestico",
-      fechaEntrada: "20/12/23",
-      ubicacionId: "via 40",
-      origenCompraId: "Malambo",
-    },
+    // {
+    //   id: 1,
+    //   nombre: "ps4",
+    //   descripcion: "consola de videojuego de 2 generacion",
+    //   idTipoObjeto: "electrodomestico",
+    //   fechaEntrada: "20/12/23",
+    //   ubicacionId: "via 40",
+    //   origenCompraId: "Malambo",
+    // },
   ]);
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const reponse = await axios.post("/createInventario", {
+  //       nombre: "nombre",
+  //       descripcion: "descripcion",
+  //       idTipoObjeto: "idTipoObjeto",
+  //       fechaEntrada: "fechaEntrada",
+  //       ubicacionId: "ubicacionId",
+  //       origenCompraId: "origenCompraId",
+  //     });
+  //     console.log(reponse.data);
+  //   } catch (error) {
+  //     console.log("Error al registrar los datos:", error);
+  //   }
+  // };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/inventario");
+        const data = await response.json();
+        setList(data);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const Column = [
     {
@@ -199,7 +229,7 @@ const Inventory = ({ user, permission = [], token }) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid container item direction="column" mt={2} >
+                <Grid container item direction="column" mt={2}>
                   <Grid item justifyContent="center" display="flex">
                     <TextField
                       color="primary"
@@ -234,7 +264,6 @@ const Inventory = ({ user, permission = [], token }) => {
           </div>
 
           <DataGrid
-            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             rows={list}
             columns={Column}
             disableSelectionOnClick

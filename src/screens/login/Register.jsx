@@ -33,7 +33,7 @@ const Register = (props) => {
   const getTypeDocument = async () => {
     const typesDocuets =
       (await backRequiest
-        .get("/parametro/3")
+        .get("/parametro/1")
         .then(({ data }) => data.valores)) || [];
     const list =
       typesDocuets.map((item) => ({
