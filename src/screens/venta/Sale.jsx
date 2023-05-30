@@ -49,7 +49,7 @@ const Sale = ({ user, permission = [], token }) => {
         createCaja: {
           valor: form.venta.valor,
           fecha: new Date(),
-          usuario: user.id,
+          usuario: form.usuario.id,
           almacen: 1,
           estado: 1,
         },
@@ -148,6 +148,7 @@ const Sale = ({ user, permission = [], token }) => {
 
   const [form, setForm] = useState({
     cliente: {
+      id:0,
       nombre: "",
       apellido: "",
       fechaNacimiento: "",
@@ -193,7 +194,7 @@ const Sale = ({ user, permission = [], token }) => {
     {
       field: "id",
       headerName: "ID",
-      width: 300,
+      width: 50,
     },
     {
       field: "valor",

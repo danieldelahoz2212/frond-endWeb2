@@ -4,39 +4,28 @@ import fondo from "../../assets/fondo.jpeg";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import Layout from "./../../components/Layout";
-import { DataGrid, GridToolbar} from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { backRequiest } from "../../api/back";
 
 const Box = ({ user, permission = [], token }) => {
-  
   const [list, setList] = useState([]);
 
   const getCaja = async () => {
     try {
-      const caja = await backRequiest
-        .get("transaccion/caja")
-        .then(({ data }) => data);
-      const list =
-        caja.map((item) => ({
-          ...item,
-          caja: `${item.caja.transaccionId} ${item.caja.valor} ${item.caja.fecha} ${item.cliente.usuarioId} ${item.caja.almacenId}`,
-        })) || [];
+      const typeCaja = await backRequiest.get("transaccion/caja").then(({ data }) => data) || [];
+      const list = typeCaja.map((item) => ({
+        ...item,
+        transaccion:  `${item.transaccion.idTipoTransaccion}`,
+        almacen: `${item.almacen.nombre} - ${item.almacen.direccion}`,
+        usuario: `${item.usuario.nombre} ${item.usuario.apellido}`
 
+      })) || [];
+      console.log(typeCaja)
       setList(list);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
-
-  const [form, setFrom] = useState({
-    caja: {
-      valor: "",
-      fecha: "",
-      usuarioId: 0,
-      almacenId: 0,
-      transaccionId: 0,
-    },
-  });
 
   useEffect(() => {
     getCaja();
@@ -44,34 +33,40 @@ const Box = ({ user, permission = [], token }) => {
 
   const column = [
     {
-      field: "Transaccion",
-      headName: "transaccionId",
-      width: 200,
-      renderCell: ({ row }) => <div>{row.transaccionId}</div>,
+      field: "id",
+      headerName: "ID",
+      width: 60,
+      renderCell: ({ row }) => <div>{row.id}</div>,
     },
     {
-      field: "Valor",
-      headName: "valor",
-      width: 200,
+      field: "transaccion",
+      headerName: "Transaccion",
+      width: 100,
+      renderCell: ({ row }) => <div>{row.transaccion}</div>,
+    },
+    {
+      field: "valor",
+      headerName: "Valor",
+      width: 150,
       renderCell: ({ row }) => <div>{row.valor}</div>,
     },
     {
-      field: "Fecha",
-      headName: "fecha",
-      width: 200,
+      field: "fecha",
+      headerName: "Fecha",
+      width: 150,
       renderCell: ({ row }) => <div>{row.fecha}</div>,
     },
     {
-      field: "Usuario",
-      headName: "usuarioId",
+      field: "usuario",
+      headerName: "Usuario",
       width: 200,
-      renderCell: ({ row }) => <div>{row.usuarioId}</div>,
+      renderCell: ({ row }) => <div>{row.usuario}</div>,
     },
     {
-      field: "Almacen",
-      headName: "almacenId",
+      field: "almacen",
+      headerName: "Almacen",
       width: 300,
-      renderCell: ({ row }) => <div>{row.almacenId}</div>,
+      renderCell: ({ row }) => <div>{row.almacen}</div>,
     },
   ];
 
@@ -110,7 +105,9 @@ const Box = ({ user, permission = [], token }) => {
             pageSize={5}
             autoHeight
             rowPerPageOptions={[5]}
-            slots={{ toolbar: GridToolbar }}
+            components={{
+              Toolbar: GridToolbar,
+            }}
           />
         </Grid>
       </Grid>
@@ -132,5 +129,4 @@ Box.prototype = {
   token: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
 };
-
 export default connect(mapStateToProps, null)(Box);

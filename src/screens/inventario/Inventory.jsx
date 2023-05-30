@@ -13,6 +13,7 @@ import fondo from "../../assets/fondo.jpeg";
 import { Layout } from "../../components";
 import PropTypes from "prop-types";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { backRequiest } from "../../api/back";
 
 // import { Delete } from "@mui/icons-material";
 // import axios from "./../../utils/api";
@@ -40,6 +41,22 @@ const Inventory = ({ user, permission = [], token }) => {
     // },
   ]);
 
+  const getInventario = async () => {
+    try {
+      const inventory = await backRequiest
+        .get("transaccion/inventario")
+        .then(({ data }) => data);
+      const list =
+        inventory.map((item) => ({
+          ...item,
+        })) || [];
+        console.log(inventory)
+        setList(list)
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
+  };
+
   // const handleSubmit = async () => {
   //   try {
   //     const reponse = await axios.post("/createInventario", {
@@ -57,17 +74,7 @@ const Inventory = ({ user, permission = [], token }) => {
   // };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/inventario");
-        const data = await response.json();
-        setList(data);
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
-      }
-    };
-
-    fetchData();
+    getInventario();
   }, []);
 
   const Column = [
@@ -80,7 +87,7 @@ const Inventory = ({ user, permission = [], token }) => {
     {
       field: "descripcion",
       headerName: "Descripción",
-      width: 700,
+      width: 300,
       renderCell: ({ row }) => <div>{row.descripcion}</div>,
     },
     {
@@ -93,6 +100,7 @@ const Inventory = ({ user, permission = [], token }) => {
       field: "fechaEntrada",
       headerName: "Fecha De Entrada",
       width: 300,
+      renderCell: ({ row }) => <div>{row.fechaDeEntrada}</div>,
     },
     {
       field: "ubicacionId",
@@ -223,7 +231,7 @@ const Inventory = ({ user, permission = [], token }) => {
                         label="Fecha De Entrada"
                         sx={{ width: "100%" }}
                         name="fecha"
-                        type="data"
+                        type="date"
                         id="fecha"
                       />
                     </Grid>
